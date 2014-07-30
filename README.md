@@ -43,12 +43,23 @@ Current implemented instructions:
 
 Example program:
 
-LBL START
-MOV
-TCW
-MOV
-TCC
-JMP START
+    LBL START
+    MOV
+    TCW
+    MOV
+    TCC
+    JMP START
 
 This program makes the bugs go diagonally across the grid. 
 
+    LBL MOVE_TO_FOOD
+    MOV
+    LOK MOVE_TO_FOOD
+    LBL SEARCH
+    TCW
+    MOV
+    MOV
+    LOK MOVE_TO_FOOD
+    JMP SEARCH
+
+This program makes the bugs run towards food. If they can't see any food they stay still, rotating and looking for food. 
