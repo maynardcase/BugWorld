@@ -26,18 +26,18 @@ public class Grid {
 
     public static void addBug(Breed breed) {
         GridLocation location = GridLocation.getRandomLocation();
-        Bug bug = new Bug(100, location, Direction.NORTH, breed);
-        BugController bugController = new BugController(bug);
+        Bug bug = new BugImpl(100, location, Direction.NORTH, breed);
+        BugController bugController = new BugControllerImpl(bug);
         bugs.add(bugController);
     }
 
     public static void addBug(Bug bug) {
-        BugController bugController = new BugController(bug);
+        BugController bugController = new BugControllerImpl(bug);
         bugs.add(bugController);
     }
 
     public static void addBabyBug(Bug bug) {
-        BugController bugController = new BugController(bug);
+        BugController bugController = new BugControllerImpl(bug);
         newBugs.add(bugController);
     }
 

@@ -9,14 +9,11 @@ import com.maynardcase.bugworld.*;
 import com.maynardcase.bugworld.breeds.BreedSimpleDiagonal;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 /**
  * Created by maynard on 14/07/2014.
  */
-public class BugTest {
+public class BugImplTest {
 
     private Breed breed;
 
@@ -29,25 +26,25 @@ public class BugTest {
 
     @Test
     public void testLookForFood() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.EAST, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.EAST, breed);
         assertThat(bug.canSeeFood(), is(true));
     }
 
     @Test
     public void testCannotSeeFoodDueToWrongDirection() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
         assertThat(bug.canSeeFood(), is(false));
     }
 
     @Test
     public void testCannotSeeFoodDueToWrongLocation() {
-        Bug bug = new Bug(100, new GridLocation(49,49), Direction.EAST, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,49), Direction.EAST, breed);
         assertThat(bug.canSeeFood(), is(false));
     }
 
     @Test
     public void testMoveNorth() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
         bug.move();
         // Lose 2 energy each time we move
         assertThat(bug.getEnergy(), is(98));
@@ -57,7 +54,7 @@ public class BugTest {
 
     @Test
     public void testTurnClockwise() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
         bug.turnClockwise();
 
         assertThat(bug.getEnergy(), is(99));
@@ -68,7 +65,7 @@ public class BugTest {
 
     @Test
     public void testTurnCounterClockwise() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
         bug.turnCounterClockwise();
 
         assertThat(bug.getEnergy(), is(99));
@@ -79,7 +76,7 @@ public class BugTest {
 
     @Test
     public void testWait() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
         bug.waitForOneCycle();
 
         assertThat(bug.getEnergy(), is(99));
@@ -91,7 +88,7 @@ public class BugTest {
 
     @Test
     public void testIsDead() {
-        Bug bug = new Bug(1, new GridLocation(49,50), Direction.NORTH, breed);
+        Bug bug = new BugImpl(1, new GridLocation(49,50), Direction.NORTH, breed);
 
         assertThat(bug.isDead(), is(false));
 
@@ -102,34 +99,34 @@ public class BugTest {
 
     @Test
     public void testSetVariable() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
-        bug.setVariable("Test", new Integer(100));
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
+        bug.setVariable("Test", 100);
 
         assertThat(bug.getEnergy(), is(99));
 
-        assertThat(bug.getVariable("Test").intValue(), is(100));
+        assertThat(bug.getVariable("Test"), is(100));
 
         assertThat(bug.getVariable("NotPresent"), is(nullValue()));
     }
 
     @Test
     public void testIncrementVariable() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
-        bug.setVariable("Test", new Integer(100));
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
+        bug.setVariable("Test", 100);
 
         bug.incrementVariable("Test");
         assertThat(bug.getEnergy(), is(98));
-        assertThat(bug.getVariable("Test").intValue(), is(101));
+        assertThat(bug.getVariable("Test"), is(101));
     }
 
     @Test
     public void testDecrementVariable() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
-        bug.setVariable("Test", new Integer(100));
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
+        bug.setVariable("Test", 100);
 
         bug.decrementVariable("Test");
         assertThat(bug.getEnergy(), is(98));
-        assertThat(bug.getVariable("Test").intValue(), is(99));
+        assertThat(bug.getVariable("Test"), is(99));
     }
 
 

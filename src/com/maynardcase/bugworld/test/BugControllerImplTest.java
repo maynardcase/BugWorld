@@ -1,25 +1,19 @@
 package com.maynardcase.bugworld.test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 
 import com.maynardcase.bugworld.*;
 import com.maynardcase.bugworld.breeds.AbstractBreed;
-import com.maynardcase.bugworld.breeds.BreedSimpleDiagonal;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.awt.*;
 
 /**
  * Created by maynard on 23/07/2014.
  */
-public class BugControllerTest {
+public class BugControllerImplTest {
     private Breed breed;
 
     @Before
@@ -32,8 +26,8 @@ public class BugControllerTest {
 
     @Test
     public void testBEQ() {
-        Bug bug = new Bug(100, new GridLocation(49,50), Direction.NORTH, breed);
-        BugController bugController = new BugController(bug);
+        Bug bug = new BugImpl(100, new GridLocation(49,50), Direction.NORTH, breed);
+        BugController bugController = new BugControllerImpl(bug);
 
         // PC is zero
         assertThat(bugController.getPC(), is(0));
@@ -41,7 +35,7 @@ public class BugControllerTest {
         assertThat(bugController.getPC(), is(1));
         bugController.execute(); // STO VARIABLE 5
         assertThat(bugController.getPC(), is(2));
-        assertThat(bugController.getBug().getVariable("VARIABLE").intValue(), is(5));
+        assertThat(bugController.getBug().getVariable("VARIABLE"), is(5));
         bugController.execute(); // BEQ VARIABLE 4 START
         // The BEQ fails because the values are not equal
         assertThat(bugController.getPC(), is(3));

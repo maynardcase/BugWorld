@@ -2,8 +2,6 @@ package com.maynardcase.bugworld;
 
 import com.maynardcase.bugworld.breeds.BreedDiagonalFoodHunt;
 import com.maynardcase.bugworld.breeds.BreedMovingFoodHunt;
-import com.maynardcase.bugworld.breeds.BreedSimpleDiagonal;
-import com.maynardcase.bugworld.breeds.BreedSimpleFoodHunt;
 
 import java.awt.*;
 import java.util.*;
@@ -109,14 +107,7 @@ public class Simulator {
         return (bugs.size() <= 0);
     }
 
-    public static void drawBugs(Graphics2D g2d) {
-        for (BugController b : bugs) {
-            b.getBug().drawBug(g2d);
-        }
-    }
-
-
-    public static Queue getPopulationHistory() {
+    public static Queue<Integer> getPopulationHistory() {
         return populationHistory;
     }
 }
