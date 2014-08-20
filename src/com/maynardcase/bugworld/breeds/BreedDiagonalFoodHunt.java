@@ -18,6 +18,11 @@ public class BreedDiagonalFoodHunt extends AbstractBreed implements Breed {
         return Color.BLUE;
     }
 
+    @Override
+    public String getName() {
+        return "DiagonalFoodHunt";
+    }
+
     public void breedDiagonalFoodHunt() {
         // Run towards food
         program.add("LBL MOVE_TO_FOOD");

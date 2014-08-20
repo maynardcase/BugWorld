@@ -18,4 +18,7 @@ public class AbstractBreed {
         return program.get(pc);
     }
 
+    public String getName() {
+        return "Unknown Breed";
+    }
 }

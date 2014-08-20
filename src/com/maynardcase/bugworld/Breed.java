@@ -11,5 +11,5 @@ public interface Breed {
     public void initialise();
     public String getInstruction(int pc);
     public Color getColor();
-
+    public String getName();
 }

@@ -90,4 +90,22 @@ public class Grid {
     public static int getBugPopulation() {
         return bugs.size();
     }
+
+    public static int getBugPopulation(Breed breed) {
+        int breedCount = 0;
+        for (BugController b : bugs) {
+            if (breed.equals(b.getBug().getBreed())) {
+                breedCount++;
+            }
+        }
+        return breedCount;
+    }
+
+    public static Set<Breed> getBugBreeds() {
+        Set<Breed> allBreeds = new HashSet<Breed>();
+        for (BugController b : bugs) {
+            allBreeds.add(b.getBug().getBreed());
+        }
+        return allBreeds;
+    }
 }

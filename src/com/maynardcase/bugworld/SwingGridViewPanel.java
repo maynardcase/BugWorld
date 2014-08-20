@@ -15,7 +15,7 @@ public class SwingGridViewPanel extends JPanel {
     private int gridHeight = 500;
     private int scale = 4;
     private int populationStartPointx = 410;
-    private int populationStartPointy = 200;
+    private int populationStartPointy = 400;
 
 
     BufferedImage bi = new BufferedImage(gridWidth, gridHeight, BufferedImage.TYPE_INT_RGB);
@@ -50,14 +50,22 @@ public class SwingGridViewPanel extends JPanel {
         String population = "Population: " + new Integer(Grid.getBugPopulation()).toString();
         g2.drawString(population, gridWidth-90, 30);
 
-        Queue<Integer> populationHistory = Simulator.getPopulationHistory();
-        int count = 0;
-        for (Integer i : populationHistory) {
-            g2.fillRect(populationStartPointx+(count/5), populationStartPointy - i, 1, 1);
-            count++;
-            if (count > 500) {
-                break;
+        Map<Breed,Queue<Integer>> populationHistory = Simulator.getPopulationHistory();
+
+        int breedCount = 0;
+        for (Breed b : populationHistory.keySet()) {
+            g2.setColor(b.getColor());
+            String breedPopulation = "Population (" + b.getName() + "): " + new Integer(Grid.getBugPopulation(b)).toString();
+            g2.drawString(breedPopulation, gridWidth-90, 30 + (20 * (breedCount + 2)));
+            int count = 0;
+            for (Integer i : populationHistory.get(b)) {
+                g2.fillRect(populationStartPointx + (count / 5), populationStartPointy - i, 1, 1);
+                count++;
+                if (count > 500) {
+                    break;
+                }
             }
+            breedCount++;
         }
     }
 

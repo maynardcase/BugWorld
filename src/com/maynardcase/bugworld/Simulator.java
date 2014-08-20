@@ -18,7 +18,7 @@ public class Simulator {
     private static List<BugController> bugs;
     private static List<BugController> newBugs;
     private static List<BugController> deadBugs;
-    private static Queue<Integer> populationHistory;
+    private static Map<Breed,Queue<Integer>> populationHistory;
 
     public static void main(String[] args) {
         // Create bugs
@@ -34,7 +34,7 @@ public class Simulator {
     }
 
     private static void initialisePopulationHistory() {
-        populationHistory = new LinkedList<Integer>();
+        populationHistory = new HashMap<Breed,Queue<Integer>>();
     }
 
     public static void updateBugStates() {
@@ -69,9 +69,17 @@ public class Simulator {
         }
 
         // Store history of population
-        populationHistory.add(Grid.getBugPopulation());
-        if (populationHistory.size() > 500) {
-            populationHistory.remove();
+        Set<Breed> allBreeds = Grid.getBugBreeds();
+        for (Breed b : allBreeds)  {
+            Queue<Integer> breedHistory = populationHistory.get(b);
+            if (breedHistory == null) {
+                breedHistory = new LinkedList<Integer>();
+            }
+            breedHistory.add(Grid.getBugPopulation(b));
+            if (breedHistory.size() > 500) {
+                breedHistory.remove();
+            }
+            populationHistory.put(b, breedHistory);
         }
     }
 
@@ -107,7 +115,7 @@ public class Simulator {
         return (bugs.size() <= 0);
     }
 
-    public static Queue<Integer> getPopulationHistory() {
+    public static Map<Breed,Queue<Integer>> getPopulationHistory() {
         return populationHistory;
     }
 }

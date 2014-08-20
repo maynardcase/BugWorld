@@ -20,6 +20,11 @@ public class BreedSimpleDiagonal extends AbstractBreed implements Breed {
         return Color.RED;
     }
 
+    @Override
+    public String getName() {
+        return "SimpleDiagonal";
+    }
+
     public void simpleDiagonal() {
         program.add("LBL START");
         program.add("MOV");

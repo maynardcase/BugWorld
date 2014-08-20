@@ -20,6 +20,11 @@ public class BreedSimpleFoodHunt extends AbstractBreed implements Breed {
         return Color.BLUE;
     }
 
+    @Override
+    public String getName() {
+        return "SimpleFoodHunt";
+    }
+
     public void simpleFoodHunt() {
         program.add("LBL MOVE_TO_FOOD");
         program.add("MOV");
